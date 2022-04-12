@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     openbookInfo () {
-      debugger
+      // debugger
       this.$router.push(`/book-info/${this.bookId}`)
     },
   }

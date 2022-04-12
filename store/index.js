@@ -1,5 +1,3 @@
-import { list } from "postcss"
-
 export const state = () => ({
   bookSearchQuery: null,
   bookSearchResults: null,

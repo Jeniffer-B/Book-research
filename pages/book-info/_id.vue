@@ -86,10 +86,7 @@ export default {
     })
   },
   mounted () {
-    if (this.$store.state.bookSearchResults === null) {
-      this.redirectHome()
-    }
-    this.selectedBook = this.$store.state.bookSearchResults.find(book => book.id === this.$route.params.id)
+    this.selectedBook = this.getSelectedBook();
     if (this.selectedBook === null) {
       this.redirectHome()
     }
@@ -101,6 +98,24 @@ export default {
       addReadList: 'addBookToReadList',
       addToReadList: 'addBookToToReadList'
     }),
+    getSelectedBook() {
+      if (this.$store.state.favList.length > 0) {
+        return this.$store.state.favList.find(book => book.id === this.$route.params.id)
+      }
+      if (this.$store.state.readingList.length > 0) {
+        return this.$store.state.readingList.find(book => book.id === this.$route.params.id)
+      }
+      if (this.$store.state.readList.length > 0) {
+        return this.$store.state.readList.find(book => book.id === this.$route.params.id)
+      }
+      if (this.$store.state.toReadList.length > 0) {
+        return this.$store.state.toReadList.find(book => book.id === this.$route.params.id)
+      }
+      if (Array.isArray(this.$store.state.bookSearchResults)) {
+        this.$store.state.bookSearchResults.find(book => book.id === this.$route.params.id)
+      }
+      return null;
+    },
     redirectHome () {
       this.$router.push('/')
     },
